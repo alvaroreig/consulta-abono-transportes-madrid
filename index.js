@@ -31,11 +31,16 @@ variables globales
 casper.then(function(){
   fecha_caducidad = this.fetchText('#ctl00_cntPh_tableResultados > table > tbody > tr:nth-child(2) > td > span:nth-child(11)'); 
   fecha_recarga = this.fetchText('#ctl00_cntPh_tableResultados > table > tbody > tr:nth-child(2) > td > span:nth-child(19)'); 
+  /**
+  Eliminamos la cadena "Fecha de caducidad: " para dejar solo
+  las fechas en formato DD-MM-YYYY
+  */
+  fecha_caducidad = fecha_caducidad.substring(20,100);
+  fecha_recarga = fecha_recarga.substring(20,100);
 });
 
 casper.run(function(){
-  console.log(fecha_caducidad);
-  console.log(fecha_recarga);
-  console.log(casper.cli.args[0])
+  console.log("Fecha de caducidad: " + fecha_caducidad);
+  console.log("Fecha de recarga: " + fecha_recarga);
 });
 

@@ -1,8 +1,44 @@
 var casper = require('casper').create();
-require('dotenv').config({silent: true});
+var moment = require('moment');
+
+var numero_abono="";
+var dias_para_avisar;
 
 var fecha_recarga;
 var fecha_caducidad;
+
+/************************************
+*                                   *
+* Procesar argumentos               *
+*                                   *
+************************************/
+
+numero_abono = casper.cli.get("numero_abono").toString();
+dias_para_avisar = casper.cli.get("dias_para_avisar");
+
+/**
+Al recuperar el argumento, si el número tiene ceros a la izquierda
+Casper los borra. Por ello, como el número debe tener diez cifras,
+si tiene menos concatenamos ceros a la izquierda.
+*/
+if (numero_abono.length < 10){
+  var ceros_en_falta = 10 - numero_abono.length;
+
+  while (ceros_en_falta > 0){
+    var cero = "0";
+    numero_abono = cero.concat(numero_abono);
+    ceros_en_falta--;
+  }
+}
+
+console.log(numero_abono);
+console.log(dias_para_avisar);
+
+/************************************
+*                                   *
+* Invocar web abono                 *
+*                                   *
+************************************/
 
 casper.start('https://www.tarjetatransportepublico.es/CRTM-ABONOS/consultaSaldo.aspx');
 
@@ -42,5 +78,15 @@ casper.then(function(){
 casper.run(function(){
   console.log("Fecha de caducidad: " + fecha_caducidad);
   console.log("Fecha de recarga: " + fecha_recarga);
+
+  if ((fecha_recarga != null)||(fecha_recarga != undefined)){
+
+    var fecha_recarga_moment = moment(fecha_recarga, 'DD-MM-YYYY');
+    var fecha_actual = moment();
+    var dias_diferencia = fecha_recarga_moment.diff(fecha_actual, 'days');
+
+    console.log(dias_diferencia);
+
+  }
 });
 

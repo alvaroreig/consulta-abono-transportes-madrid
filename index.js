@@ -31,8 +31,8 @@ if (numero_abono.length < 10){
   }
 }
 
-console.log(numero_abono);
-console.log(dias_para_avisar);
+//console.log(numero_abono);
+//console.log(dias_para_avisar);
 
 /************************************
 *                                   *
@@ -76,8 +76,8 @@ casper.then(function(){
 });
 
 casper.run(function(){
-  console.log("Fecha de caducidad: " + fecha_caducidad);
-  console.log("Fecha de recarga: " + fecha_recarga);
+  //console.log("Fecha de caducidad: " + fecha_caducidad);
+  //console.log("Fecha de recarga: " + fecha_recarga);
 
   if ((fecha_recarga != null)||(fecha_recarga != undefined)){
 
@@ -86,7 +86,7 @@ casper.run(function(){
     var dias_diferencia = fecha_recarga_moment.diff(fecha_actual, 'days');
 
     console.log(dias_diferencia);
-
+    process.exit()
   }
 });
 

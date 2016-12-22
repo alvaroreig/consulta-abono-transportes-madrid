@@ -1,19 +1,17 @@
 /**
 Dependencies:
-- dotenv : Needed to load parameter values from .env
-- winston: Needed for logging
+- dotenv : Necesario para cargar valores de .env
+- winston: Necesario para el logging.
 */
 
 require('dotenv').config({silent: true});
 const winston = require('winston');
+var consulta_abono_helper = require('./consulta_abono_helper');
 
-/**
-We don't have log access yet
-*/
 console.log("Starting process:" + new Date());
 
 /**
-If any required parameter is missing, abort
+Si falta algún parámetro, abortamos
 */
 if (
 		(process.env.LOG_LEVEL == null)||
@@ -29,7 +27,7 @@ if (
 
 
 	){
-	console.log('Missing parameter in .env file: Aborting');
+	console.log('Falta parámetro obligatorio en el archivo .env: Abortamos');
 	process.exit(1);
 }
 
@@ -42,7 +40,11 @@ var email_destino=process.env.EMAIL_DESTINO;
 
 winston.log('info', {  
 	"Código de abono": codigo_abono,
-	"Número de abono": send_ebook_to_kindle,
+	"Número de abono": numero_abono,
 	"Días para avisar": dias_para_avisar,
   "Email destino" : email_destino
+});
+
+consulta_abono_helper.reemplazarVariablesConsultarWebAbono(numero_abono,function(){
+
 });

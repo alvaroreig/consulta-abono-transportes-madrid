@@ -45,6 +45,10 @@ winston.log('info', {
   "Email destino" : email_destino
 });
 
-consulta_abono_helper.reemplazarVariablesConsultarWebAbono(numero_abono,function(){
+consulta_abono_helper.reemplazarVariablesConsultarWebAbono(
+  numero_abono,
+  codigo_abono,
+  function(){
 
-});
+  }
+);

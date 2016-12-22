@@ -70,6 +70,10 @@ module.exports = {
 			winston.log('error', {  
 				"Replace tags output": stderr
 			});	
+		} else {
+			winston.log('debug', {  
+				"Reemplazo del número de abono": "OK"
+			});
 		}
 
 		exec(comando_reemplazar_codigo_abono, function(error, stdout, stderr) {
@@ -78,7 +82,11 @@ module.exports = {
 				winston.log('error', {  
 					"Replace tags output": stderr
 				});	
-			}
+			} else {
+				winston.log('debug', {  
+					"Reemplazo del código de abono": "OK"
+				});
+		}
 
 		});
 

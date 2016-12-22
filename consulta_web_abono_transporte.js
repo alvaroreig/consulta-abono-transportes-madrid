@@ -1,8 +1,7 @@
 var casper = require('casper').create();
 var moment = require('moment');
 
-var numero_abono="";
-var dias_para_avisar;
+var dias_para_avisar=14;
 
 var fecha_recarga;
 var fecha_caducidad;
@@ -12,9 +11,6 @@ var fecha_caducidad;
 * Procesar argumentos               *
 *                                   *
 ************************************/
-
-numero_abono = casper.cli.get("numero_abono").toString();
-dias_para_avisar = casper.cli.get("dias_para_avisar");
 
 //console.log(numero_abono);
 //console.log(dias_para_avisar);
